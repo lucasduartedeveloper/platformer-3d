@@ -117,7 +117,10 @@ $(document).ready(function() {
     document.body.appendChild(jumpView);
 
     jumpView.ontouchstart = function(e) {
-        
+        var vect = new CANNON.Vec3(0, 50, 0);
+        csg0.userData.physicsBody.applyForce(
+            vect, csg0.userData.physicsBody.position
+        );
     };
 
     shootView = document.createElement("button");
@@ -137,7 +140,7 @@ $(document).ready(function() {
     isAttacking = false;
     attackInterval = 0;
     shootView.onclick = function() {
-        
+        csg0.userData.physicsBody.angularVelocity.y += 5;
     };
 
     oscillator = createOscillator();

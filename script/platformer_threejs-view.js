@@ -489,14 +489,33 @@ var createMap = function() {
 
     group.add(cube);
 
+    var planeGeometry = 
+    new THREE.PlaneGeometry(3, 3, 8, 8); 
+    var material = new THREE.MeshStandardMaterial( {
+        color: 0x5555ff,
+        opacity: 0.5,
+        wireframe: true
+    } );
+
+    var plane = 
+    new THREE.Mesh(planeGeometry, material);
+    plane.rotation.x = -(Math.PI/2);
+    plane.position.y = -1.15;
+
+    group.add(plane);
+
     startCannonjs(function() {
         addGeometry(csg0, true);
         addGeometry(csg1, true);
-        addIndexedGeometry(cube, true);
+
+        //addIndexedGeometry(cube, true);
+        addBox(cube, [ 0.25, 0.25, 0.25 ] , true);
 
         addGeometry(stadium0);
         addGeometry(stadium1);
         addGeometry(stadium2);
+
+        addPlane(plane);
 
         clock = new THREE.Clock();
 

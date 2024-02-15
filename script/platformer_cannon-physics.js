@@ -21,20 +21,15 @@ var addGeometry = function(mesh, isRigidBody) {
     var indices = [];
 
     for (var n = 0; n < verticesPos.length; n += 3) {
-        var vect = new CANNON.Vec3(
-            verticesPos[n],
-            verticesPos[n + 1],
-            verticesPos[n + 2]
-        );
-        vertices.push(vect);
+        vertices[n] = verticesPos[n];
+        vertices[n + 1] = verticesPos[n + 1];
+        vertices[n + 2] = verticesPos[n + 2];
     }
 
     for (var n = 0; n < vertices.length; n += 3) {
-        indices.push([
-            vertices[n].x,
-            vertices[n].y,
-            vertices[n].z
-        ]);
+        indices[n] = n;
+        indices[n + 1] = n+1;
+        indices[n + 2] = n+2;
     }
 
     // Cannonjs Section
@@ -63,20 +58,15 @@ var addIndexedGeometry = function(mesh, isRigidBody) {
     var indices = [];
 
     for (var n = 0; n < verticesPos.length; n += 3) {
-        var vect = new CANNON.Vec3(
-            verticesPos[n],
-            verticesPos[n + 1],
-            verticesPos[n + 2]
-        );
-        vertices.push(vect);
+        vertices[n] = verticesPos[n];
+        vertices[n + 1] = verticesPos[n + 1];
+        vertices[n + 2] = verticesPos[n + 2];
     }
 
     for (var n = 0; n < indicesPos.length; n += 3) {
-        indices.push([ 
-            indicesPos[n],
-            indicesPos[n + 1],
-            indicesPos[n + 2]
-        ])
+        indices[n] = indicesPos[n];
+        indices[n + 1] = indicesPos[n + 1];
+        indices[n + 2] = indicesPos[n + 2];
     }
 
     // Cannonjs Section
@@ -93,6 +83,54 @@ var addIndexedGeometry = function(mesh, isRigidBody) {
         mesh.userData.physicsBody = body;
         rigidBodies.push(mesh);
     }
+};
+
+var addPlane = function(mesh, isRigidBody) {
+    var shape = new CANNON.Plane();
+    var body = new CANNON.Body({ mass: (isRigidBody ? 1 : 0) });
+    body.addShape(shape);
+    body.position.x = mesh.position.x;
+    body.position.y = mesh.position.y;
+    body.position.z = mesh.position.z;
+
+    body.quaternion.set(
+        mesh.quaternion.x,
+        mesh.quaternion.y,
+        mesh.quaternion.z,
+        mesh.quaternion.w
+    );
+
+    physicsWorld.addBody(body);
+
+    //if (isRigidBody) {
+        mesh.userData.physicsBody = body;
+        rigidBodies.push(mesh);
+    //}
+};
+
+var addBox = function(mesh, size, isRigidBody) {
+    var shape = new CANNON.Box(
+        new CANNON.Vec3(size[0], size[1], size[2])
+    );
+    var body = new CANNON.Body({ mass: (isRigidBody ? 1 : 0) });
+    body.addShape(shape);
+    body.position.x = mesh.position.x;
+    body.position.y = mesh.position.y;
+    body.position.z = mesh.position.z;
+
+    body.quaternion.set(
+        mesh.quaternion.x,
+        mesh.quaternion.y,
+        mesh.quaternion.z,
+        mesh.quaternion.w
+    );
+
+    physicsWorld.addBody(body);
+
+    //if (isRigidBody) {
+        mesh.userData.physicsBody = body;
+        rigidBodies.push(mesh);
+    //}
 };
 
 var physicsIterations = 0;
