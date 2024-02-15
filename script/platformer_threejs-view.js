@@ -209,7 +209,15 @@ var load3D = function() {
             );*/
         }
 
-        group.rotateZ(analogPosition.x*(Math.PI/180));
+        csg0.rotateZ(analogPosition.x*-(Math.PI/10));
+        csg1.rotateX(analogPosition.y*-(Math.PI/10));
+
+        csg0.userData.physicsBody.quaternion.set(
+            csg0.quaternion.x,
+            csg0.quaternion.y,
+            csg0.quaternion.z,
+            csg0.quaternion.w
+        );
 
         controls.update();
         if (renderer.enable3d == 0) {
@@ -500,7 +508,7 @@ var createMap = function() {
     var plane = 
     new THREE.Mesh(planeGeometry, material);
     plane.rotation.x = -(Math.PI/2);
-    plane.position.y = -1.15;
+    plane.position.y = -0.85;
 
     group.add(plane);
 
