@@ -236,9 +236,11 @@ var backgroundMode = false;
 document.addEventListener(visibilityChange, function(){
     backgroundMode = !backgroundMode;
     if (backgroundMode) {
+        clock.running = false;
         console.log("backgroundMode: "+backgroundMode);
     }
     else {
+        clock.start();
         console.log("backgroundMode: "+backgroundMode);
     }
 }, false);

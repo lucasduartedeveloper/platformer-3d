@@ -198,9 +198,9 @@ var load3D = function() {
             updateCannonjs();
 
             /*
-            cameraTargetGroup.position.x = ball0.position.x;
-            cameraTargetGroup.position.y = ball0.position.y;
-            cameraTargetGroup.position.z = ball0.position.z;
+            cameraTargetGroup.position.x = csg0.position.x;
+            cameraTargetGroup.position.y = csg0.position.y+1;
+            cameraTargetGroup.position.z = csg0.position.z;
 
             virtualCamera.position.set(
                 cameraTargetGroup.position.x, 
@@ -209,15 +209,8 @@ var load3D = function() {
             );*/
         }
 
-        csg0.rotateZ(analogPosition.x*-(Math.PI/10));
-        csg1.rotateX(analogPosition.y*-(Math.PI/10));
-
-        csg0.userData.physicsBody.quaternion.set(
-            csg0.quaternion.x,
-            csg0.quaternion.y,
-            csg0.quaternion.z,
-            csg0.quaternion.w
-        );
+        cube.userData.physicsBody.velocity.x += analogPosition.x;
+        cube.userData.physicsBody.velocity.z += analogPosition.y;
 
         controls.update();
         if (renderer.enable3d == 0) {
@@ -489,7 +482,7 @@ var createMap = function() {
         wireframe: true
     } );
 
-    var cube = 
+    cube = 
     new THREE.Mesh(cubeGeometry, material);
 
     cube.position.x = 1.25;
@@ -514,6 +507,8 @@ var createMap = function() {
 
     startCannonjs(function() {
         addGeometry(csg0, true);
+        csg0.userData.physicsBody.angularVelocity.y += 500;
+
         addGeometry(csg1, true);
 
         //addIndexedGeometry(cube, true);
