@@ -117,9 +117,7 @@ $(document).ready(function() {
     document.body.appendChild(jumpView);
 
     jumpView.ontouchstart = function(e) {
-        ammoTmpPos.setValue(0, 25, 0);
-        csg0.userData.physicsBody.applyTorque(ammoTmpPos);
-        csg1.userData.physicsBody.applyTorque(ammoTmpPos);
+        
     };
 
     shootView = document.createElement("button");
@@ -139,8 +137,7 @@ $(document).ready(function() {
     isAttacking = false;
     attackInterval = 0;
     shootView.onclick = function() {
-        ammoTmpPos.setValue(0, 50, 0);
-        ball1.userData.physicsBody.applyForce(ammoTmpPos);
+        
     };
 
     oscillator = createOscillator();
@@ -208,7 +205,7 @@ var animate = function() {
         }
         //drawImage();
 
-        if (ammoStarted) {
+        if (cannonStarted) {
             var rotationSpeed = csg0.rotation.y - previousRotation;
             rotationSpeed = rotationSpeed > 0 ? 
             (rotationSpeed - Math.PI) : rotationSpeed;

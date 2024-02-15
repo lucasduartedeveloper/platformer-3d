@@ -26,15 +26,14 @@ $thirdpart_script = [
     5 => "script/thirdpart/csg-lib.js",
     6 => "script/thirdpart/three-csg.js",
     7 => "script/thirdpart/CanvasRecorder.js",
-    8 => "script/thirdpart/OBJExporter.js",
-    9 => "script/thirdpart/ammo.js"
+    8 => "script/thirdpart/OBJExporter.js"
 ];
 
 $script = [
     0 => "script/audio-helper.js",
     1 => "script/math-helper.js",
     2 => "script/platformer_threejs-view.js",
-    3 => "script/platformer_physics.js",
+    3 => "script/platformer_cannon-physics.js",
     4 => "script/platformer.js"
 ];
 
@@ -124,6 +123,8 @@ echo "\n";
 <!--
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.js" integrity="sha512-+E0UhA8ib3H5AlREMX1I0mc3R7HMkQYH+hkkfW47aLGMnVJwod+jJ2jxe94xYyUdqPs9AFDHUxKnJzScEP5cmA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- PHP: Inject script files -->
 <?php

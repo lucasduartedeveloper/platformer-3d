@@ -194,8 +194,8 @@ var load3D = function() {
         if (iterations > 0 && render)
         req = requestAnimationFrame( animateThreejs );
 
-        if (ammoStarted) {
-            updateAmmojs();
+        if (cannonStarted) {
+            updateCannonjs();
 
             /*
             cameraTargetGroup.position.x = ball0.position.x;
@@ -308,7 +308,7 @@ var loadOBJ = function(path, callback) {
     );
 };
 
-var ammoStarted = false;
+var cannonStarted = false;
 
 var createMap = function() {
     var sphereGeometry = 
@@ -484,21 +484,14 @@ var createMap = function() {
     var cube = 
     new THREE.Mesh(cubeGeometry, material);
 
-    cube.position.x = 0.75;
-    cube.position.z = -0.75;
+    cube.position.x = 1.25;
+    cube.position.z = -1.25;
 
     group.add(cube);
 
-    Ammo().then(function() {
-        setup();
-        startAmmojs();
-
-        //addSphere(ball0, 0.1);
-        //addSphere(ball1, 0.1);
-        addCone(csg0, 0.25);
-        addCone(csg1, 0.25);
-        //addGeometry(csg, true);
-
+    startCannonjs(function() {
+        addGeometry(csg0, true);
+        addGeometry(csg1, true);
         addIndexedGeometry(cube, true);
 
         addGeometry(stadium0);
@@ -506,6 +499,9 @@ var createMap = function() {
         addGeometry(stadium2);
 
         clock = new THREE.Clock();
-        ammoStarted = true;
+
+        setTimeout(function() {
+            cannonStarted = true;
+        }, 1000);
     });
 };
